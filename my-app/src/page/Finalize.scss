@@ -1,0 +1,50 @@
+.finlize {
+  width: 100%;
+  max-width: 1054px;
+  margin: 0 auto;
+  height: 790px;
+  padding: 44px 0;
+  &__title {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+
+    color: #222222;
+  }
+  &__sub-title {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+
+    color: #222222;
+    margin: 8px 0 616px 0;
+  }
+  &__btn {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+    color: #222222;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      transform: rotate(-135deg);
+      border-top: 1px solid #222222;
+      border-right: 1px solid #222222;
+      margin: 7px 0 0 -20px;
+    }
+  }
+}
