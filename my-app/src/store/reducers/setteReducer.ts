@@ -1,9 +1,4 @@
-import {
-  SiteState,
-  SiteAction,
-  SiteActionTypes,
-  SortSiteAction,
-} from "./../../types/index";
+import { SiteState, SiteAction, SiteActionTypes } from "./../../types/index";
 const siteState: SiteState = {
   site: [],
   loading: false,
@@ -11,7 +6,7 @@ const siteState: SiteState = {
 };
 export const siteReducer = (
   state = siteState,
-  action: SiteAction | SortSiteAction
+  action: SiteAction
 ): SiteState => {
   switch (action.type) {
     case SiteActionTypes.FETCH_SITE:

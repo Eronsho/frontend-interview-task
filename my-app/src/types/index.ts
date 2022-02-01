@@ -1,5 +1,6 @@
 export interface TestState {
   tests: Test[];
+  sort: Sort[];
   loading: boolean;
   error: null | string;
 }
@@ -14,6 +15,9 @@ enum Type {
   CLASSIC = "CLASSIC",
   SERVER_SIDE = "SERVER_SIDE",
   MVT = "MVT",
+}
+export interface Sort {
+  [index: string]: boolean;
 }
 
 enum Status {
@@ -121,24 +125,24 @@ export type SortAction =
   | SortSuccsessAction
   | SortErrorAction;
 //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-export enum SortSiteActionTypes {
-  SORT_SITE = "SORT_SITE",
-  SORT_SITE_SUCCESSS = " SORT_SITE_SUCCESSS",
-  SORT_SITE_ERROR = "SORT_SITE_ERROR",
+export enum SortReverseActionTypes {
+  SORT_REVERSE = "SORT_REVERSE",
+  SORT_REVERSE_SUCCESSS = " SORT_REVERSE_SUCCESSS",
+  SORT_REVERSE_ERROR = "SORT_REVERSE_ERROR",
 }
-interface SortSiteActionRequest {
-  type: SortSiteActionTypes.SORT_SITE;
+interface SortReverseActionRequest {
+  type: SortReverseActionTypes.SORT_REVERSE;
 }
 
-interface SortSiteSuccsessAction {
-  type: SortSiteActionTypes.SORT_SITE_SUCCESSS;
+interface SortReverseSuccsessAction {
+  type: SortReverseActionTypes.SORT_REVERSE_SUCCESSS;
   payload: string;
 }
-interface SortSiteErrorAction {
-  type: SortSiteActionTypes.SORT_SITE_ERROR;
+interface SortReverseErrorAction {
+  type: SortReverseActionTypes.SORT_REVERSE_ERROR;
   payload: string;
 }
-export type SortSiteAction =
-  | SortSiteActionRequest
-  | SortSiteSuccsessAction
-  | SortSiteErrorAction;
+export type SortReverseAction =
+  | SortReverseActionRequest
+  | SortReverseSuccsessAction
+  | SortReverseErrorAction;

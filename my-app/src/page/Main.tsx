@@ -8,7 +8,7 @@ import "./Main.scss";
 import { fetchSiteRequest } from "../store/action-creators/site";
 
 const Main: React.FC = () => {
-  const { tests, loading } = useTypeSelector((state) => state.tests);
+  const { tests, loading, sort } = useTypeSelector((state) => state.tests);
   const { site } = useTypeSelector((state) => state.site);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -22,7 +22,7 @@ const Main: React.FC = () => {
         <div className="main__title">Dashboard</div>
 
         <Search tests={tests} />
-        <TestsList site={site} loading={loading} tests={tests} />
+        <TestsList site={site} loading={loading} tests={tests} sort={sort} />
       </div>
     </div>
   );

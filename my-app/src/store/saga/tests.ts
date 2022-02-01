@@ -1,6 +1,11 @@
 import {
+  sortReverseSucces,
+  sortReverseError,
+} from "./../action-creators/tests";
+import {
   SearchActionTypes,
   SortActionTypes,
+  SortReverseActionTypes,
   TestActionTypes,
 } from "./../../types/index";
 import {
@@ -11,7 +16,7 @@ import {
 } from "./../action-creators/tests";
 import axios from "axios";
 import { call, put, all, takeLatest } from "redux-saga/effects";
-import { sortError, sortSucces } from "../action-creators/site";
+import { sortError, sortSucces } from "../action-creators/tests";
 const fetchTest = () => {
   return axios.get("http://localhost:3100/tests");
 };
@@ -37,8 +42,18 @@ function* SortWorker(action: any) {
     yield put(sortError("Произошла ошибка при поиске"));
   }
 }
+function* SortReverseWorker(action: any) {
+  try {
+    yield put(sortReverseSucces(action.payload));
+  } catch (e) {
+    yield put(sortReverseError("Произошла ошибка при поиске"));
+  }
+}
 export function* fetchTestsWatcher() {
   yield all([takeLatest(TestActionTypes.FETCH_TESTS, FetchTestsWorker)]);
   yield all([takeLatest(SearchActionTypes.SEARACH_TEST, SearchSiteWorker)]);
   yield all([takeLatest(SortActionTypes.SORT, SortWorker)]);
+  yield all([
+    takeLatest(SortReverseActionTypes.SORT_REVERSE, SortReverseWorker),
+  ]);
 }

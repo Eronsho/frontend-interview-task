@@ -1,21 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { sortRequest } from "../store/action-creators/site";
-import { Site, Test } from "../types";
+import {
+  sortRequest,
+  sortReverseRequest,
+} from "../store/action-creators/tests";
+import { Site, Sort, Test } from "../types";
 import TestsItems from "./TestsItem";
 import "./TestsList.scss";
 type TestsListProps = {
   tests: Test[];
   site: Site[];
+  sort: Sort[];
   loading: boolean;
 };
-const TestsList: React.FC<TestsListProps> = ({ tests, site, loading }) => {
+const TestsList: React.FC<TestsListProps> = ({
+  tests,
+  site,
+  loading,
+  sort,
+}) => {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  interface BigObject {
+    [index: string]: boolean;
+  }
+
   const soretName = (payload: string) => {
-    dispatch(sortRequest(payload));
+    console.log(sort);
+    for (let obj of sort) {
+      const [key] = Object.keys(obj);
+      if (key == payload && obj[key] == false) {
+        dispatch(sortRequest(payload));
+      } else if (key == payload && obj[key] == true) {
+        dispatch(sortReverseRequest(payload));
+      }
+    }
   };
+  // const sortRevers: BigObject = {
+  //   name: false,
+  //   type: false,
+  //   status: false,
+  //   site: false,
+  // };
+  // for (const key in sortRevers) {
+  //   if (key == payload && sortRevers[key] == false) {
+  //     sortRevers[key] = true;
+  //     console.log(sortRevers);
+  //   } else if (key == payload && sortRevers[key] == true) {
+  //     dispatch(sortReverseRequest(payload));
+  //     sortRevers[key] = false;
+  //   }
+  // }
+  // return sortRevers;
 
   return (
     <div>
@@ -24,21 +62,18 @@ const TestsList: React.FC<TestsListProps> = ({ tests, site, loading }) => {
           name
         </div>
         <div
-          onClick={() => dispatch(sortRequest("type"))}
+          onClick={() => soretName("type")}
           className="filter__type text type-bf "
         >
           type
         </div>
         <div
-          onClick={() => dispatch(sortRequest("status"))}
+          onClick={() => soretName("status")}
           className="filter__status text"
         >
           status
         </div>
-        <div
-          onClick={() => dispatch(sortRequest("site"))}
-          className="filter__site text"
-        >
+        <div onClick={() => soretName("site")} className="filter__site text">
           site
         </div>
       </div>
