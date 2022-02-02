@@ -78,6 +78,7 @@ export const testsReducer = (
         error: null,
         sort: state.sort.map((obj) => {
           const [key] = Object.keys(obj);
+          obj[key] = false;
           if (key == action.payload) {
             obj[key] = true;
           }
@@ -108,11 +109,13 @@ export const testsReducer = (
             debugger;
             const nameA = a.siteId;
             const nameB = b.siteId;
+
             if (nameA === 2) return -1;
             if (nameA === 3) return 1;
             if (nameA === 1) return 0;
-          }
 
+            return -1;
+          }
           return 0;
         }),
       };
@@ -160,9 +163,9 @@ export const testsReducer = (
             debugger;
             const nameA = a.siteId;
             const nameB = b.siteId;
-            if (nameA === 2) return -1;
-            if (nameA === 1) return 1;
+            if (nameA === 2) return 1;
             if (nameA === 3) return 0;
+            if (nameA === 1) return -1;
           }
           return 0;
         }),
