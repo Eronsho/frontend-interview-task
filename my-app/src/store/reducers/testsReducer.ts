@@ -22,14 +22,15 @@ export const testsReducer = (
   switch (action.type) {
     case TestActionTypes.FETCH_TESTS:
       return {
+        ...state,
         loading: true,
         error: null,
         tests: state.tests,
         sort: state.sort,
       };
     case TestActionTypes.FETCH_TESTS_SUCCESSS:
-      debugger;
       return {
+        ...state,
         loading: false,
         tests: action.payload,
         error: null,
@@ -37,6 +38,7 @@ export const testsReducer = (
       };
     case TestActionTypes.FETCH_TESTS_ERROR:
       return {
+        ...state,
         loading: false,
         error: action.payload,
         tests: state.tests,
@@ -44,6 +46,7 @@ export const testsReducer = (
       };
     case SearchActionTypes.SEARACH_TEST:
       return {
+        ...state,
         loading: true,
         error: null,
         tests: state.tests,
@@ -51,6 +54,7 @@ export const testsReducer = (
       };
     case SearchActionTypes.SEARACH_TEST_SUCCESSS:
       return {
+        ...state,
         loading: false,
         error: null,
         tests: state.tests.filter(
@@ -60,6 +64,7 @@ export const testsReducer = (
       };
     case SearchActionTypes.SEARACH_TEST_ERROR:
       return {
+        ...state,
         loading: false,
         error: "aasd",
         tests: state.tests,
@@ -67,6 +72,7 @@ export const testsReducer = (
       };
     case SortActionTypes.SORT:
       return {
+        ...state,
         loading: true,
         error: null,
         tests: state.tests,
@@ -74,12 +80,13 @@ export const testsReducer = (
       };
     case SortActionTypes.SORT_SUCCESSS:
       return {
+        ...state,
         loading: false,
         error: null,
         sort: state.sort.map((obj) => {
           const [key] = Object.keys(obj);
           obj[key] = false;
-          if (key == action.payload) {
+          if (key === action.payload) {
             obj[key] = true;
           }
           return obj;
@@ -121,6 +128,7 @@ export const testsReducer = (
       };
     case SortReverseActionTypes.SORT_REVERSE:
       return {
+        ...state,
         loading: true,
         error: null,
         tests: state.tests,
@@ -129,11 +137,12 @@ export const testsReducer = (
     case SortReverseActionTypes.SORT_REVERSE_SUCCESSS:
       debugger;
       return {
+        ...state,
         loading: false,
         error: null,
         sort: state.sort.map((obj) => {
           const [key] = Object.keys(obj);
-          if (key == action.payload) {
+          if (key === action.payload) {
             obj[key] = false;
           }
           return obj;
